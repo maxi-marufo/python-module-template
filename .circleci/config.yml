@@ -1,0 +1,42 @@
+# Python CircleCI 2.1 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.1
+
+executors:
+  my-executor:
+    machine:
+      docker_layer_caching: true    # default - false
+
+jobs:
+  job:
+    executor: my-executor
+    steps:
+      - checkout
+      - run:
+          name: Vieux/sshfs
+          shell: /bin/sh
+          command: |
+            docker plugin install --grant-all-permissions vieux/sshfs
+            docker volume rm -f volume_tag
+            tee test-output.log
+      - run:
+          name: Build and Test
+          command: |
+            docker build --tag=image-tag .
+            docker run --mount type=volume,volume-driver=vieux/sshfs,src=volume_tag,target=/mnt/shared,volume-opt=sshcmd=$CLOUD_USER@$CLOUD_IP:/mnt/shared,volume-opt=password=$CLOUD_PASS image-tag
+          when: always
+          no_output_timeout: 1h
+
+workflows:
+  version: 2.1
+  workflow:
+    jobs:
+      - job:
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+                - dev
