@@ -1,3 +1,14 @@
+# Added by me
+*.pyc
+data/in/
+data/out/
+src/.noseids
+cover
+*/stats.dat
+AUTHORS
+notebooks/
+ChangeLog
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

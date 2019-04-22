@@ -17,17 +17,10 @@ import datetime
 import glob
 
 # PIP dependencies examples:
-import pbr.version
 import numpy as np
 import pandas as pd
-from skimage import io, transform, color, util
-from past.utils import old_div
-from sklearn.model_selection import train_test_split
-import boto3
 
 # Other dependencies:
-
-
 
 # Other auxiliary classes
 

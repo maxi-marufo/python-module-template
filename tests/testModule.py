@@ -35,11 +35,11 @@ class testModule(object):
     @attr(attr='1')
     @attr('tag_a')
     def test_a(self):
-        module.someMethod()
+        module.module.someMethod()
         pass
 
     @attr(attr='2')
     @attr('tag_b')
     def test_b(self):
-        module.otherMethod()
+        module.module.otherMethod()
         pass
